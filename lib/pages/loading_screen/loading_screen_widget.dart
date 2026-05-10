@@ -5,29 +5,28 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'location_screen_copy_model.dart';
-export 'location_screen_copy_model.dart';
+import 'loading_screen_model.dart';
+export 'loading_screen_model.dart';
 
-class LocationScreenCopyWidget extends StatefulWidget {
-  const LocationScreenCopyWidget({super.key});
+class LoadingScreenWidget extends StatefulWidget {
+  const LoadingScreenWidget({super.key});
 
-  static String routeName = 'LocationScreenCopy';
-  static String routePath = '/locationScreenCopy';
+  static String routeName = 'LoadingScreen';
+  static String routePath = '/loadingScreen';
 
   @override
-  State<LocationScreenCopyWidget> createState() =>
-      _LocationScreenCopyWidgetState();
+  State<LoadingScreenWidget> createState() => _LoadingScreenWidgetState();
 }
 
-class _LocationScreenCopyWidgetState extends State<LocationScreenCopyWidget> {
-  late LocationScreenCopyModel _model;
+class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
+  late LoadingScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LocationScreenCopyModel());
+    _model = createModel(context, () => LoadingScreenModel());
   }
 
   @override

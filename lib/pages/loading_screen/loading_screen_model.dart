@@ -1,9 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'location_screen_copy_widget.dart' show LocationScreenCopyWidget;
+import 'loading_screen_widget.dart' show LoadingScreenWidget;
 import 'package:flutter/material.dart';
 
-class LocationScreenCopyModel
-    extends FlutterFlowModel<LocationScreenCopyWidget> {
+class LoadingScreenModel extends FlutterFlowModel<LoadingScreenWidget> {
   @override
   void initState(BuildContext context) {}
 

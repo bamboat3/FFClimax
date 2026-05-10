@@ -33,12 +33,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => LocationScreenWidget(),
+      errorBuilder: (context, state) => LoadingScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => LocationScreenWidget(),
+          builder: (context, _) => LoadingScreenWidget(),
         ),
         FFRoute(
           name: LocationScreenWidget.routeName,
@@ -46,9 +46,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => LocationScreenWidget(),
         ),
         FFRoute(
-          name: LocationScreenCopyWidget.routeName,
-          path: LocationScreenCopyWidget.routePath,
-          builder: (context, params) => LocationScreenCopyWidget(),
+          name: LoadingScreenWidget.routeName,
+          path: LoadingScreenWidget.routePath,
+          builder: (context, params) => LoadingScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
