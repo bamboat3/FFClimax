@@ -1,9 +1,11 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'loading_screen_model.dart';
 export 'loading_screen_model.dart';
 
@@ -37,6 +39,8 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -58,6 +62,12 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                 FFButtonWidget(
                   onPressed: () async {
                     await requestPermission(locationPermission);
+                    _model.outputGetCurrentLocation =
+                        await actions.getCurrentLocation();
+                    FFAppState().curlocation = _model.outputGetCurrentLocation!;
+                    safeSetState(() {});
+
+                    safeSetState(() {});
                   },
                   text: 'Get Location',
                   options: FFButtonOptions(
@@ -88,7 +98,37 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-              ],
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        FFAppState().curlocation,
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              font: GoogleFonts.inter(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              fontSize: 22.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ].divide(SizedBox(height: 30.0)),
             ),
           ),
         ),
