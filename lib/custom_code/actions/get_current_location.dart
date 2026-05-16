@@ -1,4 +1,5 @@
 // Automatic FlutterFlow imports
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom actions
@@ -7,19 +8,12 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:geolocator/geolocator.dart';
+import 'package:climax/custom_code/actions/determinePosition.dart';
 
-Future getLocation() async {
+Future<String> getCurrentLocation() async {
   // Add your function code here!
-  //
-  //
 
-  final LocationSettings locationSettings = LocationSettings(
-    accuracy: LocationAccuracy.low,
-    distanceFilter: 100,
-  );
+  Position pos = determinePosition();
 
-  Position position = await Geolocator.getCurrentPosition(
-    locationSettings: locationSettings,
-  );
-  print(position);
+  return '${pos.latitude}, ${pos.longitude}';
 }
