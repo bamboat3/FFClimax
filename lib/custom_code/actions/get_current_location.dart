@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:climax/custom_code/determinePosition.dart';
 import 'package:geolocator/geolocator.dart';
-import '/custom_code/determinePosition.dart';
 
-Future<String> getCurrentLocation() async {
+Future<LocationStruct> getCurrentLocation() async {
   // Add your function code here!
 
   Position pos = await determinePosition();
 
-  return '${pos.latitude}, ${pos.longitude}';
+  LocationStruct lon = LocationStruct(
+      latitude: pos.latitude.toString(), longitude: pos.longitude.toString());
+
+  return lon;
 }

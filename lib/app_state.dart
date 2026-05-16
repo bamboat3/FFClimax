@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/backend/schema/structs/index.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -20,9 +21,13 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _curlocation = '';
-  String get curlocation => _curlocation;
-  set curlocation(String value) {
-    _curlocation = value;
+  LocationStruct _curLocation = LocationStruct();
+  LocationStruct get curLocation => _curLocation;
+  set curLocation(LocationStruct value) {
+    _curLocation = value;
+  }
+
+  void updateCurLocationStruct(Function(LocationStruct) updateFn) {
+    updateFn(_curLocation);
   }
 }

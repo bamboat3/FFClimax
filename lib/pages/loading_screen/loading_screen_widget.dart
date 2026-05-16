@@ -64,7 +64,7 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                     await requestPermission(locationPermission);
                     _model.outputGetCurrentLocation =
                         await actions.getCurrentLocation();
-                    FFAppState().curlocation = _model.outputGetCurrentLocation!;
+                    FFAppState().curLocation = _model.outputGetCurrentLocation!;
                     safeSetState(() {});
 
                     safeSetState(() {});
@@ -104,7 +104,37 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                   children: [
                     Expanded(
                       child: Text(
-                        FFAppState().curlocation,
+                        FFAppState().curLocation.latitude,
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              font: GoogleFonts.inter(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              fontSize: 22.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        FFAppState().curLocation.longitude,
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.inter(
