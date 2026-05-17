@@ -30,4 +30,10 @@ class FFAppState extends ChangeNotifier {
   void updateCurLocationStruct(Function(LocationStruct) updateFn) {
     updateFn(_curLocation);
   }
+
+  String _printLocation = '';
+  String get printLocation => _printLocation;
+  set printLocation(String value) {
+    _printLocation = value;
+  }
 }
