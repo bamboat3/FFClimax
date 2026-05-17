@@ -43,11 +43,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => LoadingScreenWidget(),
         ),
         FFRoute(
-          name: LocationScreenWidget.routeName,
-          path: LocationScreenWidget.routePath,
-          builder: (context, params) => LocationScreenWidget(),
-        ),
-        FFRoute(
           name: LoadingScreenWidget.routeName,
           path: LoadingScreenWidget.routePath,
           builder: (context, params) => LoadingScreenWidget(),
