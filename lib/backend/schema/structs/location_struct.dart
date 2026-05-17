@@ -7,17 +7,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class LocationStruct extends BaseStruct {
   LocationStruct({
-    String? latitude,
     String? longitude,
-  })  : _latitude = latitude,
-        _longitude = longitude;
-
-  // "latitude" field.
-  String? _latitude;
-  String get latitude => _latitude ?? '';
-  set latitude(String? val) => _latitude = val;
-
-  bool hasLatitude() => _latitude != null;
+    String? latitude,
+  })  : _longitude = longitude,
+        _latitude = latitude;
 
   // "longitude" field.
   String? _longitude;
@@ -26,40 +19,47 @@ class LocationStruct extends BaseStruct {
 
   bool hasLongitude() => _longitude != null;
 
+  // "latitude" field.
+  String? _latitude;
+  String get latitude => _latitude ?? '';
+  set latitude(String? val) => _latitude = val;
+
+  bool hasLatitude() => _latitude != null;
+
   static LocationStruct fromMap(Map<String, dynamic> data) => LocationStruct(
-        latitude: data['latitude'] as String?,
         longitude: data['longitude'] as String?,
+        latitude: data['latitude'] as String?,
       );
 
   static LocationStruct? maybeFromMap(dynamic data) =>
       data is Map ? LocationStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        'latitude': _latitude,
         'longitude': _longitude,
+        'latitude': _latitude,
       }.withoutNulls;
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'latitude': serializeParam(
-          _latitude,
-          ParamType.String,
-        ),
         'longitude': serializeParam(
           _longitude,
+          ParamType.String,
+        ),
+        'latitude': serializeParam(
+          _latitude,
           ParamType.String,
         ),
       }.withoutNulls;
 
   static LocationStruct fromSerializableMap(Map<String, dynamic> data) =>
       LocationStruct(
-        latitude: deserializeParam(
-          data['latitude'],
+        longitude: deserializeParam(
+          data['longitude'],
           ParamType.String,
           false,
         ),
-        longitude: deserializeParam(
-          data['longitude'],
+        latitude: deserializeParam(
+          data['latitude'],
           ParamType.String,
           false,
         ),
@@ -71,19 +71,19 @@ class LocationStruct extends BaseStruct {
   @override
   bool operator ==(Object other) {
     return other is LocationStruct &&
-        latitude == other.latitude &&
-        longitude == other.longitude;
+        longitude == other.longitude &&
+        latitude == other.latitude;
   }
 
   @override
-  int get hashCode => const ListEquality().hash([latitude, longitude]);
+  int get hashCode => const ListEquality().hash([longitude, latitude]);
 }
 
 LocationStruct createLocationStruct({
-  String? latitude,
   String? longitude,
+  String? latitude,
 }) =>
     LocationStruct(
-      latitude: latitude,
       longitude: longitude,
+      latitude: latitude,
     );

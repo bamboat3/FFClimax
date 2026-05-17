@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -62,9 +63,32 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       await requestPermission(locationPermission);
-                      _model.varStr = await actions.getLocation();
-                      FFAppState().printLocation = _model.varStr!;
-                      safeSetState(() {});
+                      _model.outputLoc = await actions.getCurrentLocation();
+                      _model.apiResultmv2 = await WeatherCall.call(
+                        plat: _model.outputLoc?.latitude,
+                        plon: _model.outputLoc?.longitude,
+                        papikey: FFAppConstants.kAPIKey,
+                      );
+
+                      if ((_model.apiResultmv2?.succeeded ?? true)) {
+                        FFAppState().printLocation =
+                            (_model.apiResultmv2?.jsonBody ?? '').toString();
+                        safeSetState(() {});
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              (_model.apiResultmv2?.exceptionMessage ?? ''),
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor:
+                                FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      }
 
                       safeSetState(() {});
                     },

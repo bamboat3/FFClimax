@@ -21,6 +21,12 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  String _printLocation = '';
+  String get printLocation => _printLocation;
+  set printLocation(String value) {
+    _printLocation = value;
+  }
+
   LocationStruct _curLocation = LocationStruct();
   LocationStruct get curLocation => _curLocation;
   set curLocation(LocationStruct value) {
@@ -29,11 +35,5 @@ class FFAppState extends ChangeNotifier {
 
   void updateCurLocationStruct(Function(LocationStruct) updateFn) {
     updateFn(_curLocation);
-  }
-
-  String _printLocation = '';
-  String get printLocation => _printLocation;
-  set printLocation(String value) {
-    _printLocation = value;
   }
 }

@@ -12,11 +12,11 @@ import 'package:geolocator/geolocator.dart';
 
 Future<LocationStruct> getCurrentLocation() async {
   // Add your function code here!
-
   Position pos = await determinePosition();
 
-  LocationStruct lon = LocationStruct(
-      latitude: pos.latitude.toString(), longitude: pos.longitude.toString());
-
-  return lon;
+  LocationStruct loc = LocationStruct(
+    latitude: pos.latitude.toString(),
+    longitude: pos.longitude.toString(),
+  );
+  return loc;
 }
