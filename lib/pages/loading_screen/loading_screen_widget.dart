@@ -129,10 +129,19 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    FFAppState().printLocation,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          font: GoogleFonts.inter(
+                  Expanded(
+                    child: Text(
+                      FFAppState().printLocation,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.inter(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            letterSpacing: 0.0,
                             fontWeight: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .fontWeight,
@@ -140,13 +149,7 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                                 .bodyMedium
                                 .fontStyle,
                           ),
-                          letterSpacing: 0.0,
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .fontWeight,
-                          fontStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                        ),
+                    ),
                   ),
                 ],
               ),
