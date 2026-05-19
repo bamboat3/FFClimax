@@ -231,7 +231,7 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                             ),
                           ),
                           Text(
-                            '',
+                            FFAppState().condition,
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
