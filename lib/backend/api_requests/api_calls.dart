@@ -23,6 +23,7 @@ class WeatherCall {
         'lat': plat,
         'lon': plon,
         'appid': papikey,
+        'units': "metric",
       },
       returnBody: true,
       encodeBodyUtf8: false,
