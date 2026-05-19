@@ -33,10 +33,10 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await requestPermission(locationPermission);
-      _model.outputLoc = await actions.getCurrentLocation();
       FFAppState().isLoading = true;
       safeSetState(() {});
+      await requestPermission(locationPermission);
+      _model.outputLoc = await actions.getCurrentLocation();
       _model.apiResultmv2 = await WeatherCall.call(
         plat: _model.outputLoc?.latitude,
         plon: _model.outputLoc?.longitude,
@@ -99,7 +99,7 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryText,
         body: SafeArea(
           top: true,
           child: Column(

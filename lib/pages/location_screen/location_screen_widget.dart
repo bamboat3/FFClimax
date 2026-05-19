@@ -110,10 +110,10 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                _model.outputLoc2 =
-                                    await actions.getCurrentLocation();
                                 FFAppState().isLoading = true;
                                 safeSetState(() {});
+                                _model.outputLoc2 =
+                                    await actions.getCurrentLocation();
                                 _model.apiResultmv22 = await WeatherCall.call(
                                   plat: _model.outputLoc2?.latitude,
                                   plon: _model.outputLoc2?.longitude,
