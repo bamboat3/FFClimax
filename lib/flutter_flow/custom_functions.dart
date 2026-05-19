@@ -41,3 +41,7 @@ String getMessage(int temp) {
     return 'Bring a 🧥 just in case';
   }
 }
+
+int convertDoubleToInt(double value) {
+  return value.toInt();
+}

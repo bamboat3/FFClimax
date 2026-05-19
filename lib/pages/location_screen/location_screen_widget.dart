@@ -154,10 +154,11 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                   Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
-                      functions.getMessage(getJsonField(
+                      functions
+                          .getMessage(functions.convertDoubleToInt(getJsonField(
                         widget.curLoction,
                         r'''$.main.temp''',
-                      )),
+                      ))),
                       textAlign: TextAlign.end,
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Spartan MB',
