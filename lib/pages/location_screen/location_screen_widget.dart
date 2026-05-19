@@ -88,87 +88,93 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        RichText(
-                          textScaler: MediaQuery.of(context).textScaler,
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: getJsonField(
-                                  widget.curLoction,
-                                  r'''$.main.temp''',
-                                ).toString(),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Spartan MB',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      fontSize: FFAppConstants.kTempTextStyle
-                                          .toDouble(),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                              TextSpan(
-                                text: '°',
-                                style: TextStyle(),
-                              )
-                            ],
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          RichText(
+                            textScaler: MediaQuery.of(context).textScaler,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: getJsonField(
+                                    widget.curLoction,
+                                    r'''$.main.temp''',
+                                  ).toString(),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Spartan MB',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        fontSize: FFAppConstants.kTempTextStyle
+                                            .toDouble(),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: '°',
+                                  style: TextStyle(),
+                                )
+                              ],
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Spartan MB',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    fontSize: FFAppConstants.kTempTextStyle
+                                        .toDouble(),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                            ),
+                          ),
+                          Text(
+                            functions.getWeatherIcon(getJsonField(
+                              widget.curLoction,
+                              r'''$.weather[0].id''',
+                            )),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Spartan MB',
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  fontSize:
-                                      FFAppConstants.kTempTextStyle.toDouble(),
+                                  fontSize: FFAppConstants.kConditionTextStyle
+                                      .toDouble(),
                                   letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
                                 ),
                           ),
-                        ),
-                        Text(
-                          functions.getWeatherIcon(getJsonField(
-                            widget.curLoction,
-                            r'''$.weather[0].id''',
-                          )),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Spartan MB',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: FFAppConstants.kConditionTextStyle
-                                        .toDouble(),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                        ),
-                      ].divide(SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: Text(
-                      functions
-                          .getMessage(functions.convertDoubleToInt(getJsonField(
-                        widget.curLoction,
-                        r'''$.main.temp''',
-                      ))),
-                      textAlign: TextAlign.end,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Spartan MB',
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            fontSize:
-                                FFAppConstants.kMessageTextStyle.toDouble(),
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Text(
+                        functions.getMessage(
+                            functions.convertDoubleToInt(getJsonField(
+                          widget.curLoction,
+                          r'''$.main.temp''',
+                        ))),
+                        textAlign: TextAlign.end,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Spartan MB',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              fontSize:
+                                  FFAppConstants.kMessageTextStyle.toDouble(),
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
                     ),
                   ),
                 ],
