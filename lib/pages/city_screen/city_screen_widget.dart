@@ -216,6 +216,8 @@ class _CityScreenWidgetState extends State<CityScreenWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             if (_model.textController.text != '') {
+                              FFAppState().isLoading = true;
+                              safeSetState(() {});
                               _model.apiResultebi = await CitynameCall.call(
                                 pcityname: _model.textController.text,
                                 papikey: FFAppConstants.kAPIKey,

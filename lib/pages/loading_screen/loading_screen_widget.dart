@@ -2,10 +2,12 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'loading_screen_model.dart';
 export 'loading_screen_model.dart';
 
@@ -33,6 +35,8 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(locationPermission);
       _model.outputLoc = await actions.getCurrentLocation();
+      FFAppState().isLoading = true;
+      safeSetState(() {});
       _model.apiResultmv2 = await WeatherCall.call(
         plat: _model.outputLoc?.latitude,
         plon: _model.outputLoc?.longitude,
@@ -40,6 +44,9 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
       );
 
       if ((_model.apiResultmv2?.succeeded ?? true)) {
+        FFAppState().isLoading = false;
+        safeSetState(() {});
+
         context.goNamed(
           LocationScreenWidget.routeName,
           queryParameters: {
@@ -83,6 +90,8 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -96,7 +105,24 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[].divide(SizedBox(height: 20.0)),
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (FFAppState().isLoading == true)
+                    Container(
+                      width: 100.0,
+                      height: 100.0,
+                      child: custom_widgets.Spinner(
+                        width: 100.0,
+                        height: 100.0,
+                      ),
+                    ),
+                ],
+              ),
+            ].divide(SizedBox(height: 20.0)),
           ),
         ),
       ),
