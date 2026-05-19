@@ -100,10 +100,12 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: getJsonField(
-                                    widget.curLoction,
-                                    r'''$.main.temp''',
-                                  ).toString(),
+                                  text: functions
+                                      .convertDoubleToInt(getJsonField(
+                                        widget.curLoction,
+                                        r'''$.main.temp''',
+                                      ))
+                                      .toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
