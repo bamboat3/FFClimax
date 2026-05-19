@@ -312,6 +312,8 @@ class _CityScreenWidgetState extends State<CityScreenWidget> {
                                           FlutterFlowTheme.of(context).error,
                                     ),
                                   );
+                                  FFAppState().isLoading = false;
+                                  safeSetState(() {});
                                 }
 
                                 safeSetState(() {});
