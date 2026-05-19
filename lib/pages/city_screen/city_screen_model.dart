@@ -13,6 +13,8 @@ class CityScreenModel extends FlutterFlowModel<CityScreenWidget> {
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (cityname)] action in Text widget.
   ApiCallResponse? apiResultebi;
+  // Stores action output result for [Backend Call - API (weather)] action in Text widget.
+  ApiCallResponse? outputWeatherCity;
 
   @override
   void initState(BuildContext context) {}

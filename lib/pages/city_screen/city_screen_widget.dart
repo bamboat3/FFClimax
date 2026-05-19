@@ -222,11 +222,25 @@ class _CityScreenWidgetState extends State<CityScreenWidget> {
                               );
 
                               if ((_model.apiResultebi?.succeeded ?? true)) {
+                                _model.outputWeatherCity =
+                                    await WeatherCall.call(
+                                  plat: getJsonField(
+                                    (_model.apiResultebi?.jsonBody ?? ''),
+                                    r'''$.city.coord.lat''',
+                                  ).toString(),
+                                  plon: getJsonField(
+                                    (_model.apiResultebi?.jsonBody ?? ''),
+                                    r'''$.city.coord.lon''',
+                                  ).toString(),
+                                  papikey: FFAppConstants.kAPIKey,
+                                );
+
                                 context.pushNamed(
                                   LocationScreenWidget.routeName,
                                   queryParameters: {
                                     'curLoction': serializeParam(
-                                      (_model.apiResultebi?.jsonBody ?? ''),
+                                      (_model.outputWeatherCity?.jsonBody ??
+                                          ''),
                                       ParamType.JSON,
                                     ),
                                   }.withoutNulls,
