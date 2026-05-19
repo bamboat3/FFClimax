@@ -45,10 +45,11 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
         widget.curLoction,
         r'''$.weather[0].id''',
       ));
-      FFAppState().message = functions.getMessage(getJsonField(
+      FFAppState().message =
+          functions.getMessage(functions.convertDoubleToInt(getJsonField(
         widget.curLoction,
         r'''$.main.temp''',
-      ));
+      )));
       safeSetState(() {});
     });
   }
