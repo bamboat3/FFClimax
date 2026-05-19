@@ -254,6 +254,9 @@ class _CityScreenWidgetState extends State<CityScreenWidget> {
                                       papikey: FFAppConstants.kAPIKey,
                                     );
 
+                                    FFAppState().isLoading = false;
+                                    safeSetState(() {});
+
                                     context.pushNamed(
                                       LocationScreenWidget.routeName,
                                       queryParameters: {
@@ -290,6 +293,8 @@ class _CityScreenWidgetState extends State<CityScreenWidget> {
                                             FlutterFlowTheme.of(context).error,
                                       ),
                                     );
+                                    FFAppState().isLoading = false;
+                                    safeSetState(() {});
                                   }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(

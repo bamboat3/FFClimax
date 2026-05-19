@@ -77,6 +77,8 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
+        FFAppState().isLoading = false;
+        safeSetState(() {});
       }
     });
   }
