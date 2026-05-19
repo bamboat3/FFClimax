@@ -1,12 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/scheduler.dart';
 import 'loading_screen_model.dart';
 export 'loading_screen_model.dart';
 
@@ -29,6 +28,50 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LoadingScreenModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await requestPermission(locationPermission);
+      _model.outputLoc = await actions.getCurrentLocation();
+      _model.apiResultmv2 = await WeatherCall.call(
+        plat: _model.outputLoc?.latitude,
+        plon: _model.outputLoc?.longitude,
+        papikey: FFAppConstants.kAPIKey,
+      );
+
+      if ((_model.apiResultmv2?.succeeded ?? true)) {
+        context.goNamed(
+          LocationScreenWidget.routeName,
+          queryParameters: {
+            'curLoction': serializeParam(
+              (_model.apiResultmv2?.jsonBody ?? ''),
+              ParamType.JSON,
+            ),
+          }.withoutNulls,
+          extra: <String, dynamic>{
+            '__transition_info__': TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.leftToRight,
+              duration: Duration(milliseconds: 600),
+            ),
+          },
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              (_model.apiResultmv2?.exceptionMessage ?? ''),
+              style: TextStyle(
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+                fontSize: 22.0,
+              ),
+            ),
+            duration: Duration(milliseconds: 4000),
+            backgroundColor: FlutterFlowTheme.of(context).secondary,
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -40,8 +83,6 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -55,105 +96,7 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FFButtonWidget(
-                    onPressed: () async {
-                      await requestPermission(locationPermission);
-                      _model.outputLoc = await actions.getCurrentLocation();
-                      _model.apiResultmv2 = await WeatherCall.call(
-                        plat: _model.outputLoc?.latitude,
-                        plon: _model.outputLoc?.longitude,
-                        papikey: FFAppConstants.kAPIKey,
-                      );
-
-                      if ((_model.apiResultmv2?.succeeded ?? true)) {
-                        FFAppState().printLocation =
-                            (_model.apiResultmv2?.jsonBody ?? '').toString();
-                        safeSetState(() {});
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                              (_model.apiResultmv2?.exceptionMessage ?? ''),
-                              style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                          ),
-                        );
-                      }
-
-                      safeSetState(() {});
-                    },
-                    text: 'Get Location',
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                font: GoogleFonts.interTight(
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .fontStyle,
-                                ),
-                                color: Colors.white,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .fontStyle,
-                              ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Text(
-                      FFAppState().printLocation,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            font: GoogleFonts.inter(
-                              fontWeight: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontWeight,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                            letterSpacing: 0.0,
-                            fontWeight: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontWeight,
-                            fontStyle: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .fontStyle,
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ].divide(SizedBox(height: 20.0)),
+            children: <Widget>[].divide(SizedBox(height: 20.0)),
           ),
         ),
       ),

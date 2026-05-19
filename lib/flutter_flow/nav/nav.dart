@@ -46,6 +46,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: LoadingScreenWidget.routeName,
           path: LoadingScreenWidget.routePath,
           builder: (context, params) => LoadingScreenWidget(),
+        ),
+        FFRoute(
+          name: LocationScreenWidget.routeName,
+          path: LocationScreenWidget.routePath,
+          builder: (context, params) => LocationScreenWidget(
+            curLoction: params.getParam(
+              'curLoction',
+              ParamType.JSON,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

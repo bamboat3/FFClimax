@@ -114,6 +114,11 @@ flutter:
     - assets/pdfs/
     - assets/jsons/
 
+  fonts:
+    - family: 'Spartan MB'
+      fonts:
+        - asset: assets/fonts/SpartanMB-Black.otf
+          weight: 900
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
