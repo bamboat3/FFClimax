@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'location_screen_model.dart';
 export 'location_screen_model.dart';
@@ -80,10 +81,30 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                           size: 50.0,
                         ),
-                        Icon(
-                          Icons.location_city,
-                          color: FlutterFlowTheme.of(context).primaryBackground,
-                          size: 50.0,
+                        InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(
+                              CityScreenWidget.routeName,
+                              extra: <String, dynamic>{
+                                '__transition_info__': TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType:
+                                      PageTransitionType.rightToLeft,
+                                  duration: Duration(milliseconds: 600),
+                                ),
+                              },
+                            );
+                          },
+                          child: Icon(
+                            Icons.location_city,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                            size: 50.0,
+                          ),
                         ),
                       ],
                     ),
@@ -94,6 +115,7 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                       padding: EdgeInsets.all(15.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RichText(
                             textScaler: MediaQuery.of(context).textScaler,

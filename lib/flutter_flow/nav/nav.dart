@@ -56,6 +56,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.JSON,
             ),
           ),
+        ),
+        FFRoute(
+          name: CityScreenWidget.routeName,
+          path: CityScreenWidget.routePath,
+          builder: (context, params) => CityScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

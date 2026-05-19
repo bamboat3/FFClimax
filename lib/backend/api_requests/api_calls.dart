@@ -35,6 +35,31 @@ class WeatherCall {
   }
 }
 
+class CitynameCall {
+  static Future<ApiCallResponse> call({
+    String? pcityname = '',
+    String? papikey = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'cityname',
+      apiUrl: 'https://api.openweathermap.org/data/2.5/forecast',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'q': pcityname,
+        'appid': papikey,
+        'units': "metric",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
