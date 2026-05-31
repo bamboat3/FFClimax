@@ -50,9 +50,9 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
         context.goNamed(
           LocationScreenWidget.routeName,
           queryParameters: {
-            'curLoction': serializeParam(
-              (_model.apiResultmv2?.jsonBody ?? ''),
-              ParamType.JSON,
+            'myLocation': serializeParam(
+              _model.outputLoc,
+              ParamType.DataStruct,
             ),
           }.withoutNulls,
           extra: <String, dynamic>{
@@ -113,13 +113,14 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (FFAppState().isLoading == true)
+                  if (FFAppState().isLoading)
                     Container(
                       width: 100.0,
                       height: 100.0,
-                      child: custom_widgets.Spinner(
+                      child: custom_widgets.SpinLoader(
                         width: 100.0,
                         height: 100.0,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
                     ),
                 ],

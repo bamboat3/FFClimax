@@ -11,26 +11,28 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class Spinner extends StatefulWidget {
-  const Spinner({
+class SpinLoader extends StatefulWidget {
+  const SpinLoader({
     super.key,
     this.width,
     this.height,
+    required this.color,
   });
 
   final double? width;
   final double? height;
+  final Color color;
 
   @override
-  State<Spinner> createState() => _SpinnerState();
+  State<SpinLoader> createState() => _SpinLoaderState();
 }
 
-class _SpinnerState extends State<Spinner> {
+class _SpinLoaderState extends State<SpinLoader> {
   @override
   Widget build(BuildContext context) {
     return SpinKitFoldingCube(
       color: Colors.white,
-      size: 100,
+      size: 50.0,
     );
   }
 }

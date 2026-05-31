@@ -51,16 +51,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: LocationScreenWidget.routeName,
           path: LocationScreenWidget.routePath,
           builder: (context, params) => LocationScreenWidget(
-            curLoction: params.getParam(
-              'curLoction',
-              ParamType.JSON,
+            myLocation: params.getParam(
+              'myLocation',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: LocationStruct.fromSerializableMap,
             ),
           ),
-        ),
-        FFRoute(
-          name: CityScreenWidget.routeName,
-          path: CityScreenWidget.routePath,
-          builder: (context, params) => CityScreenWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

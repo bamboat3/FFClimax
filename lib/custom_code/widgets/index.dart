@@ -1,1 +1,1 @@
-export 'spinner.dart' show Spinner;
+export 'spin_loader.dart' show SpinLoader;
