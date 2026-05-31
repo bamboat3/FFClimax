@@ -38,6 +38,11 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(
+        Duration(
+          milliseconds: 600,
+        ),
+      );
       _model.apiResult7vk = await WeatherCall.call(
         plat: widget.myLocation?.latitude,
         plon: widget.myLocation?.longitude,

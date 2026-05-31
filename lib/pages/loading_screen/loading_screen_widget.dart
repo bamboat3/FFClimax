@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,23 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
       _model.outputLoc = await actions.getCurrentLocation();
       FFAppState().curLocation = _model.outputLoc!;
       safeSetState(() {});
+
+      context.goNamed(
+        LocationScreenWidget.routeName,
+        queryParameters: {
+          'myLocation': serializeParam(
+            _model.outputLoc,
+            ParamType.DataStruct,
+          ),
+        }.withoutNulls,
+        extra: <String, dynamic>{
+          '__transition_info__': TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.leftToRight,
+            duration: Duration(milliseconds: 600),
+          ),
+        },
+      );
     });
   }
 
