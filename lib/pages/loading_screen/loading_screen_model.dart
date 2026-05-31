@@ -1,7 +1,5 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
 import 'loading_screen_widget.dart' show LoadingScreenWidget;
 import 'package:flutter/material.dart';
 
@@ -10,8 +8,6 @@ class LoadingScreenModel extends FlutterFlowModel<LoadingScreenWidget> {
 
   // Stores action output result for [Custom Action - getCurrentLocation] action in loadingScreen widget.
   LocationStruct? outputLoc;
-  // Stores action output result for [Backend Call - API (weather)] action in loadingScreen widget.
-  ApiCallResponse? apiResultmv2;
 
   @override
   void initState(BuildContext context) {}

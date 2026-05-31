@@ -1,10 +1,8 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -37,49 +35,8 @@ class _LoadingScreenWidgetState extends State<LoadingScreenWidget> {
       safeSetState(() {});
       await requestPermission(locationPermission);
       _model.outputLoc = await actions.getCurrentLocation();
-      _model.apiResultmv2 = await WeatherCall.call(
-        plat: _model.outputLoc?.latitude,
-        plon: _model.outputLoc?.longitude,
-        papikey: FFAppConstants.kAPIKey,
-      );
-
-      if ((_model.apiResultmv2?.succeeded ?? true)) {
-        FFAppState().isLoading = false;
-        safeSetState(() {});
-
-        context.goNamed(
-          LocationScreenWidget.routeName,
-          queryParameters: {
-            'myLocation': serializeParam(
-              _model.outputLoc,
-              ParamType.DataStruct,
-            ),
-          }.withoutNulls,
-          extra: <String, dynamic>{
-            '__transition_info__': TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.leftToRight,
-              duration: Duration(milliseconds: 600),
-            ),
-          },
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              (_model.apiResultmv2?.exceptionMessage ?? ''),
-              style: TextStyle(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                fontSize: 22.0,
-              ),
-            ),
-            duration: Duration(milliseconds: 4000),
-            backgroundColor: FlutterFlowTheme.of(context).secondary,
-          ),
-        );
-        FFAppState().isLoading = false;
-        safeSetState(() {});
-      }
+      FFAppState().curLocation = _model.outputLoc!;
+      safeSetState(() {});
     });
   }
 
