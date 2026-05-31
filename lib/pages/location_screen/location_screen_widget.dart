@@ -150,10 +150,8 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                                 style: TextStyle(),
                               ),
                               TextSpan(
-                                text: functions.getWeatherIcon(getJsonField(
-                                  (_model.apiResult7vk?.jsonBody ?? ''),
-                                  r'''$.main.temp''',
-                                )),
+                                text:
+                                    functions.getWeatherIcon(FFAppState().temp),
                                 style: TextStyle(),
                               )
                             ],
@@ -187,10 +185,7 @@ class _LocationScreenWidgetState extends State<LocationScreenWidget> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          functions.getMessage(getJsonField(
-                            (_model.apiResult7vk?.jsonBody ?? ''),
-                            r'''$.main.temp''',
-                          )),
+                          functions.getMessage(FFAppState().temp),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     font: GoogleFonts.inter(
